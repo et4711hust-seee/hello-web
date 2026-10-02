@@ -9,13 +9,213 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="style.css">
+    <!-- Tích hợp CSS trực tiếp để đảm bảo hiển thị đúng 100% -->
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* THANH ĐIỀU HƯỚNG SWITCHER */
+        .version-bar {
+            background-color: #1e293b;
+            color: #ffffff;
+            padding: 12px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .version-bar__container {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .version-bar__label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #94a3b8;
+        }
+
+        .version-bar__buttons {
+            display: flex;
+            gap: 8px;
+            background-color: #0f172a;
+            padding: 4px;
+            border-radius: 8px;
+        }
+
+        .v-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            padding: 8px 16px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .v-btn:hover {
+            color: #ffffff;
+        }
+
+        .v-btn.active {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* KHU VỰC NỘI DUNG HIỂN THỊ */
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .version-view {
+            width: 100%;
+            max-width: 440px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        /* Lớp ẩn giao diện */
+        .hidden {
+            display: none !important;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* BẢN BEFORE (CŨ) */
+        .old-card {
+            background: white;
+            padding: 24px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .old-card h1 {
+            color: #2563eb;
+            margin-bottom: 12px;
+        }
+
+        .old-card button {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            margin: 16px 0;
+            cursor: pointer;
+        }
+
+        /* BẢN AFTER (MỚI) */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            padding: 32px 24px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .card__title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .card__subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .btn--primary {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+        .btn--primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .counter-text__number {
+            color: var(--primary-color);
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        /* TECH NOTES */
+        .tech-note {
+            background-color: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            color: #92400e;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .tech-note--pro {
+            background-color: #dbeafe;
+            border-left-color: #2563eb;
+            color: #1e40af;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- ==========================================
-         THANH ĐIỀU HƯỚNG CHUYỂN PHIÊN BẢN (SWITCHER)
-         ========================================== -->
+    <!-- THANH CHUYỂN PHIÊN BẢN -->
     <header class="version-bar">
         <div class="version-bar__container">
             <span class="version-bar__label">Chế độ xem:</span>
@@ -23,20 +223,18 @@
                 <button id="btnBefore" class="v-btn" type="button">
                     ⏮️ Bản Ban Đầu (Before)
                 </button>
-                <button id="btnAfter" class="v-btn v-btn--active" type="button">
+                <button id="btnAfter" class="v-btn active" type="button">
                     ✨ Bản Nâng Cấp (After)
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- CONTAINER CHÍNH CHỨA 2 PHIÊN BẢN -->
+    <!-- KHU VỰC HIỂN THỊ NỘI DUNG -->
     <main class="main-content">
 
-        <!-- --------------------------------------
-             1. PHIÊN BẢN CŨ (BEFORE - BAN ĐẦU)
-             -------------------------------------- -->
-        <div id="versionBefore" class="version-view version-view--hidden">
+        <!-- 1. BẢN CŨ (BEFORE) - Ẩn mặc định -->
+        <div id="versionBefore" class="version-view hidden">
             <div class="old-card">
                 <h1>Xin chào Web</h1>
                 <p>Đây là trang web đầu tiên của học phần</p>
@@ -45,13 +243,11 @@
             </div>
             
             <div class="tech-note">
-                💡 <strong>Đặc điểm bản Before:</strong> Sử dụng HTML/CSS cơ bản, không có cấu trúc Semantic chuẩn, CSS trực tiếp đơn giản, chưa tối ưu giao diện UI/UX.
+                💡 <strong>Đặc điểm bản Before:</strong> Cấu trúc HTML cơ bản, style trực tiếp đơn giản, chưa tối ưu cấu trúc UI/UX và chưa áp dụng chuẩn BEM.
             </div>
         </div>
 
-        <!-- --------------------------------------
-             2. PHIÊN BẢN MỚI (AFTER - NÂNG CẤP)
-             -------------------------------------- -->
+        <!-- 2. BẢN MỚI (AFTER) - Hiện mặc định -->
         <div id="versionAfter" class="version-view">
             <article class="card">
                 <header class="card__header">
@@ -60,7 +256,7 @@
                 </header>
 
                 <section class="card__body">
-                    <button id="newCountButton" class="btn btn--primary" type="button" aria-label="Bấm để tăng số lần đếm">
+                    <button id="newCountButton" class="btn btn--primary" type="button">
                         Bấm vào đây
                     </button>
                 </section>
@@ -79,6 +275,56 @@
 
     </main>
 
-    <script src="script.js" defer></script>
+    <!-- SCRIPT CHUYỂN ĐỔI PHIÊN BẢN & BỘ ĐẾM -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Nút bấm & Khối giao diện
+            const btnBefore = document.getElementById('btnBefore');
+            const btnAfter = document.getElementById('btnAfter');
+            const versionBefore = document.getElementById('versionBefore');
+            const versionAfter = document.getElementById('versionAfter');
+
+            // Hàm chuyển đổi giao diện
+            function showVersion(version) {
+                if (version === 'before') {
+                    versionBefore.classList.remove('hidden');
+                    versionAfter.classList.add('hidden');
+                    btnBefore.classList.add('active');
+                    btnAfter.classList.remove('active');
+                } else {
+                    versionAfter.classList.remove('hidden');
+                    versionBefore.classList.add('hidden');
+                    btnAfter.classList.add('active');
+                    btnBefore.classList.remove('active');
+                }
+            }
+
+            // Gán sự kiện click cho các nút
+            btnBefore.addEventListener('click', () => showVersion('before'));
+            btnAfter.addEventListener('click', () => showVersion('after'));
+
+            // Xử lý đếm nút bấm bản Before
+            let countBefore = 0;
+            const oldCountButton = document.getElementById('oldCountButton');
+            const oldResult = document.getElementById('oldResult');
+            if (oldCountButton) {
+                oldCountButton.addEventListener('click', () => {
+                    countBefore++;
+                    oldResult.textContent = countBefore;
+                });
+            }
+
+            // Xử lý đếm nút bấm bản After
+            let countAfter = 0;
+            const newCountButton = document.getElementById('newCountButton');
+            const newResult = document.getElementById('newResult');
+            if (newCountButton) {
+                newCountButton.addEventListener('click', () => {
+                    countAfter++;
+                    newResult.textContent = countAfter;
+                });
+            }
+        });
+    </script>
 </body>
 </html>
