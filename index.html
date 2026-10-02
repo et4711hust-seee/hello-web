@@ -1,23 +1,47 @@
 <!DOCTYPE html>
 <html lang="vi">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport", content="width=device-width, initial-scale=1">    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trang web học HTML, CSS và JavaScript thực hành.">
+    <title>Trang Web Đầu Tiên | Học Lập Trình Web</title>
+    
+    <!-- Phông chữ Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- File CSS riêng -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-    <title>Hello Web</title>
+    <!-- Khung chính đóng vai trò Container căn giữa -->
+    <main class="page-container">
+        
+        <!-- Khối Card UI hoàn chỉnh -->
+        <article class="card">
+            <header class="card__header">
+                <h1 class="card__title">Trang Web đầu tiên</h1>
+                <p class="card__subtitle">Học HTML, CSS và JAVASCRIPT bằng thực hành</p>
+            </header>
 
-    <link rel="stylesheet" href="./style.css">
-    <script src="./script.js" defer></script>
-    </head>
+            <section class="card__body">
+                <button id="countButton" class="btn btn--primary" type="button" aria-label="Bấm để tăng số lần đếm">
+                    Bấm vào đây
+                </button>
+            </section>
 
-    <body>
-        <main class="card">
-            <h1>Trang Web đầu tiên</h1>
-            <p>Học HTML, CSS và JAVASCRIPT bằng thực hành</p>
+            <footer class="card__footer">
+                <p class="counter-text">
+                    Bạn đã bấm <strong id="result" class="counter-text__number">0</strong> lần
+                </p>
+            </footer>
+        </article>
 
-            <button id="countButton" type="button">Bấm vào đây</button>
+    </main>
 
-            <p id="result">Bạn đã bấm 0 lần</p>
-        </main>
-    </body>
+    <!-- File JavaScript (Tải asynchronously để tối ưu hiệu năng) -->
+    <script src="script.js" defer></script>
+</body>
 </html>

@@ -1,21 +1,37 @@
-// Kiểm tra xem đã tải file script chưa
-console.log("Đã tải file script.jss");
+/**
+ * Quản lý tính năng Bộ đếm (Counter App)
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Khai báo trạng thái ứng dụng (State)
+    const state = {
+        count: 0
+    };
 
-// 1.  Tìm các phần tử trong trang web
-const countButton = document.querySelector("#countButton");
-const result = document.querySelector("#result");
+    // 2. Truy vấn các phần tử DOM
+    const countButton = document.getElementById('countButton');
+    const resultDisplay = document.getElementById('result');
 
-// 2. Tạo biến lưu số lần bấm
-let count = 0;
+    // Kiểm tra an toàn xem phần tử DOM có tồn tại hay không
+    if (!countButton || !resultDisplay) {
+        console.error('Không tìm thấy các phần tử DOM cần thiết.');
+        return;
+    }
 
-// 3. Xử lý mỗi lần người dùng bấm nút
-countButton.addEventListener("click", function(){
-    count = count + 1;
+    /**
+     * Cập nhật giao diện khi State thay đổi
+     */
+    const render = () => {
+        resultDisplay.textContent = state.count;
+    };
 
-    console.log("số lần bấm: ", count);
+    /**
+     * Xử lý sự kiện khi bấm nút
+     */
+    const handleIncrement = () => {
+        state.count += 1;
+        render();
+    };
 
-    // Cập nhật nội dung hiển thị
-    // result.textContent = 'Bạn đã bấm ${count} lần.';
-    result.textContent = "Bạn đã bấm " + count + " lần";
+    // 3. Đăng ký sự kiện
+    countButton.addEventListener('click', handleIncrement);
 });
-
