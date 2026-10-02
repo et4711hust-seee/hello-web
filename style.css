@@ -1,128 +1,84 @@
-/* ==========================================================================
-   1. CẤU HÌNH BIẾN & RESET
-   ========================================================================== */
-:root {
-    --primary-color: #2563eb;
-    --primary-hover: #1d4ed8;
-    --primary-active: #1e40af;
-    --bg-color: #f8fafc;
-    --card-bg: #ffffff;
-    --text-main: #0f172a;
-    --text-muted: #64748b;
-    --border-color: #e2e8f0;
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>So Sánh Phiên Bản Web | Before & After</title>
     
-    --radius-lg: 16px;
-    --radius-md: 8px;
-    --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
-    --shadow-button: 0 4px 12px rgba(37, 99, 235, 0.25);
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    --font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    --transition-fast: 0.2s ease;
-}
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-*, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+    <!-- ==========================================
+         THANH ĐIỀU HƯỚNG CHUYỂN PHIÊN BẢN (SWITCHER)
+         ========================================== -->
+    <header class="version-bar">
+        <div class="version-bar__container">
+            <span class="version-bar__label">Chế độ xem:</span>
+            <div class="version-bar__buttons">
+                <button id="btnBefore" class="v-btn" type="button">
+                    ⏮️ Bản Ban Đầu (Before)
+                </button>
+                <button id="btnAfter" class="v-btn v-btn--active" type="button">
+                    ✨ Bản Nâng Cấp (After)
+                </button>
+            </div>
+        </div>
+    </header>
 
-/* ==========================================================================
-   2. BỐ CỤC TỔNG THỂ (LAYOUT)
-   ========================================================================== */
-body {
-    font-family: var(--font-family);
-    background-color: var(--bg-color);
-    color: var(--text-main);
-    line-height: 1.5;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
+    <!-- CONTAINER CHÍNH CHỨA 2 PHIÊN BẢN -->
+    <main class="main-content">
 
-.page-container {
-    width: 100%;
-    max-width: 440px;
-}
+        <!-- --------------------------------------
+             1. PHIÊN BẢN CŨ (BEFORE - BAN ĐẦU)
+             -------------------------------------- -->
+        <div id="versionBefore" class="version-view version-view--hidden">
+            <div class="old-card">
+                <h1>Xin chào Web</h1>
+                <p>Đây là trang web đầu tiên của học phần</p>
+                <button id="oldCountButton" type="button">Bấm vào đây</button>
+                <p>Bạn đã bấm <span id="oldResult">0</span> lần</p>
+            </div>
+            
+            <div class="tech-note">
+                💡 <strong>Đặc điểm bản Before:</strong> Sử dụng HTML/CSS cơ bản, không có cấu trúc Semantic chuẩn, CSS trực tiếp đơn giản, chưa tối ưu giao diện UI/UX.
+            </div>
+        </div>
 
-/* ==========================================================================
-   3. THANH PHẦN CARD (BEM CLASS)
-   ========================================================================== */
-.card {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    padding: 32px 24px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
+        <!-- --------------------------------------
+             2. PHIÊN BẢN MỚI (AFTER - NÂNG CẤP)
+             -------------------------------------- -->
+        <div id="versionAfter" class="version-view">
+            <article class="card">
+                <header class="card__header">
+                    <h1 class="card__title">Trang Web đầu tiên</h1>
+                    <p class="card__subtitle">Học HTML, CSS và JAVASCRIPT bằng thực hành</p>
+                </header>
 
-.card__title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    margin-bottom: 8px;
-}
+                <section class="card__body">
+                    <button id="newCountButton" class="btn btn--primary" type="button" aria-label="Bấm để tăng số lần đếm">
+                        Bấm vào đây
+                    </button>
+                </section>
 
-.card__subtitle {
-    font-size: 0.95rem;
-    color: var(--text-muted);
-}
+                <footer class="card__footer">
+                    <p class="counter-text">
+                        Bạn đã bấm <strong id="newResult" class="counter-text__number">0</strong> lần
+                    </p>
+                </footer>
+            </article>
 
-/* ==========================================================================
-   4. NÚT BẤM & TƯƠNG TÁC (BUTTON)
-   ========================================================================== */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 12px 24px;
-    font-family: inherit;
-    font-size: 1rem;
-    font-weight: 600;
-    border: none;
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
-}
+            <div class="tech-note tech-note--pro">
+                🚀 <strong>Đặc điểm bản After:</strong> Sử dụng HTML5 Semantic chuẩn, CSS BEM, CSS Custom Properties (Biến), hiệu ứng chuyển động mượt, hỗ trợ đọc màn hình (Accessibility).
+            </div>
+        </div>
 
-.btn--primary {
-    background-color: var(--primary-color);
-    color: #ffffff;
-    box-shadow: var(--shadow-button);
-}
+    </main>
 
-.btn--primary:hover {
-    background-color: var(--primary-hover);
-    transform: translateY(-2px);
-}
-
-.btn--primary:active {
-    background-color: var(--primary-active);
-    transform: translateY(0);
-}
-
-/* Hiệu ứng click nảy nhẹ cho nút */
-.btn:focus-visible {
-    outline: 3px solid rgba(37, 99, 235, 0.4);
-    outline-offset: 2px;
-}
-
-/* ==========================================================================
-   5. HIỂN THỊ KẾT QUẢ
-   ========================================================================== */
-.counter-text {
-    font-size: 1rem;
-    color: var(--text-main);
-}
-
-.counter-text__number {
-    color: var(--primary-color);
-    font-size: 1.25rem;
-    font-weight: 700;
-}
+    <script src="script.js" defer></script>
+</body>
+</html>
